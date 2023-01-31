@@ -8,9 +8,9 @@ metadata:
     "helm.sh/hook-weight": "1"
 data:
   create.sh: |-
-    mysql -h {{ .Values.keyrock.db.host }} -u {{ .Values.keyrock.db.user }} -p$DB_PASSWORD {{ .Values.marketplacePolicy.dbName }} <<EOF
+    mysql -h {{ .Values.keyrock.db.host }} -u {{ .Values.keyrock.db.user }} -p$DB_PASSWORD {{ .Values.initScript.marketplacePolicy.dbName }} <<EOF
 
-    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.marketplacePolicy.issuer | quote }}, {{ .Values.marketplacePolicy.target | quote }}, '{"target": {"accessSubject": {{ .Values.marketplacePolicy.target | quote }} }, "notBefore": 1616583866, "policySets": [{"target": {"environment": {"licenses": ["ISHARE.0001"]}}, "policies": [{"rules": [{"effect": "Permit"}], "target": {"actions": ["POST"], "resource": {"type": "delegationEvidence", "attributes": ["*"], "identifiers": ["*"]}}}]}], "notOnOrAfter": 1735817171, "policyIssuer": {{ .Values.marketplacePolicy.issuer | quote }} }');
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.marketplacePolicy.issuer | quote }}, {{ .Values.initScript.marketplacePolicy.target | quote }}, '{"target": {"accessSubject": {{ .Values.initScript.marketplacePolicy.target | quote }} }, "notBefore": 1616583866, "policySets": [{"target": {"environment": {"licenses": ["ISHARE.0001"]}}, "policies": [{"rules": [{"effect": "Permit"}], "target": {"actions": ["POST"], "resource": {"type": "delegationEvidence", "attributes": ["*"], "identifiers": ["*"]}}}]}], "notOnOrAfter": 1735817171, "policyIssuer": {{ .Values.initScript.marketplacePolicy.issuer | quote }} }');
 
     COMMIT;
     EOF

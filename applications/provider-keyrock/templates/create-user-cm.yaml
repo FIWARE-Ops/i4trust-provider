@@ -41,7 +41,7 @@ data:
         'X-Auth-token': token
       }
       
-      {{- range $u := .Values.initScript.user }}
+      {{- range $u := .Values.initScript.createUser.user }}
       user_data = {
         'user': {
           'username': {{ $u.username | quote }},
