@@ -34,11 +34,6 @@ kubectl -n i4t-provider-{BRANCH_NAME} get routes
 ```
 or check in the OpenShift console or in ArgoCD.
 
-For the marketplace, when the branch was called `demo`, this might give you something like
-```shell
-XYZ
-```
-The marketplace logic proxy would be available under the URL: `https://marketplace-biz-ecosystem-logic-proxy-0-i4t-provider-demo.apps.fiware.fiware.dev`.
 
 
 ### Uninstall

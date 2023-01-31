@@ -9,7 +9,7 @@ metadata:
     "helm.sh/hook-weight": "1"
 spec:
   containers:
-    - name: hella-keyrock-user-create
+    - name: provider-keyrock-user-create
       image: python:3
       command:
         - /bin/sh
