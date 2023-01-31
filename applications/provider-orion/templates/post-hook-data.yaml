@@ -13,7 +13,7 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - name: hella-orion-init-data
+        - name: provider-orion-init-data
           image: alpine/curl
           command: 
             - sh

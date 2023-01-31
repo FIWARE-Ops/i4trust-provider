@@ -38,7 +38,7 @@ applications:
             hosts:
               - mongodb.i4t-provider-main.svc.cluster.local
       initData:
-        orionHost: hella-orion.i4t-provider-main.svc.cluster.local:1026
+        orionHost: provider-orion.i4t-provider-main.svc.cluster.local:1026
 
   - name: provider-kong
     enabled: true
