@@ -1,0 +1,87 @@
+## values to be used for deployement in PoC namespaces
+## additional config file is used, since we rely on managed databases there.
+
+source: https://github.com/FIWARE-Ops/i4trust-provider
+release: i4t-provider-demo
+destination_namespace: &destination i4t-provider-demo
+branch: &branch main
+secretsEnabled: &secretsEnabled false
+
+applications:
+  - name: mongodb
+    enabled: true
+    source_path: applications/mongodb
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+
+  - name: mysql
+    enabled: true
+    source_path: applications/mysql
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+
+  - name: provider-orion
+    enabled: true
+    source_path: applications/provider-orion
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+    values:
+      orion:
+        broker:
+          db:
+            hosts:
+              - mongodb.i4t-provider-main.svc.cluster.local
+      initData:
+        orionHost: hella-orion.i4t-provider-main.svc.cluster.local:1026
+
+  - name: provider-kong
+    enabled: true
+    source_path: applications/provider-kong
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+    values:
+      ar:
+        host: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev"
+      satellite:
+        # Need to specify valid satellite hostname here
+        host: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev"
+
+  - name: provider-keyrock
+    enabled: true
+    source_path: applications/provider-keyrock
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+    values:
+      keyrock:
+        host: https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev
+        satellite:
+          # Need to specify valid satellite hostname here
+          url: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev"
+          tokenEndpoint: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev/token"
+          partiesEndpoint: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev/parties"
+
+  - name: provider-as
+    enabled: true
+    source_path: applications/provider-as
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+    values:
+      activation-service:
+        config:
+          ar:
+            token: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/oauth2/token"
+            policy: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/ar/policy"
+            delegation: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/ar/delegation"
+

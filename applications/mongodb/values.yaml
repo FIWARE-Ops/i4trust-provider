@@ -1,0 +1,64 @@
+mongodb:
+  # Values for bitnami/mongodb Helm Chart
+  #
+  # Chart values file:
+  # ref: https://github.com/bitnami/charts/blob/master/bitnami/mongodb/values.yaml
+  #
+  # Deployment on FIWARE OpenShift Cluster
+  #   *.apps.fiware.fiware.dev
+  #
+
+  image:
+    ## Bitnami MongoDB registry
+    ##
+    registry: docker.io
+    ## Bitnami MongoDB image name
+    ##
+    repository: bitnami/mongodb
+    ## Bitnami MongoDB image tag
+    ## ref: https://hub.docker.com/r/bitnami/mongodb/tags/
+    ##
+    tag: 4.4.13
+    ## Specify a imagePullPolicy
+    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    ##
+    pullPolicy: IfNotPresent
+
+  ## MongoDB architecture. Allowed values: standalone or replicaset
+  ##
+  architecture: standalone
+
+  ## Use StatefulSet instead of Deployment when deploying standalone
+  ##
+  useStatefulSet: false
+
+  ## MongoDB Authentication parameters
+  ##
+  auth:
+    ## Enable authentication
+    ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
+    ##
+    enabled: true
+    ## MongoDB root password
+    ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
+    ##
+    rootPassword: dbPassword
+
+  #extraEnvVarsSecret: mongo-users-secret
+  #existingSecret: mongo-root-secret
+
+  ## Persistence
+  persistence:
+    enabled: false
+
+  ## MongoDB pods' Security Context.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+  ##
+  podSecurityContext:
+    enabled: false
+
+  ## MongoDB containers' Security Context (main and metrics container).
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+  ##
+  containerSecurityContext:
+    enabled: false

@@ -1,0 +1,120 @@
+name: Create namespace and deploy on new branch
+
+on:
+  push:
+    branches-ignore:
+      - main
+    #branches:
+    #  - 'feature-**'
+      
+
+
+concurrency: 
+    group: ${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+
+  create:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Git checkout
+        uses: actions/checkout@v1
+
+      - name: Authenticate and set context
+        uses: redhat-actions/oc-login@v1
+
+        with:
+          # URL to your OpenShift cluster.
+          # Refer to Step 2.
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER }}
+
+          # Authentication Token. Can use username and password instead.
+          # Refer to Step 3.
+          openshift_token: ${{ secrets.OPENSHIFT_TOKEN }}
+
+          # Disables SSL cert checking. Use this if you don't have the certificate authority data.
+          insecure_skip_tls_verify: true
+
+      # extract the current branch name and provide it as a var for easier integration into sed-commands
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5.2
+
+      - name: Log the branch name
+        run: |
+          echo ${{ steps.branch-name.outputs.current_branch }}
+
+      - name: Create namespace
+        run: |
+          oc new-project i4t-provider-${{ steps.branch-name.outputs.current_branch }} || oc project i4t-provider-${{ steps.branch-name.outputs.current_branch }}
+          oc adm policy add-role-to-group cluster-admin lodestar-developers -n i4t-provider-${{ steps.branch-name.outputs.current_branch }}
+
+      - name: Rename target branch
+        run: |
+          cd i4trust-provider/
+          # replace the default destination namespace(i4t-provider-demo) with the branch namespace (prefixed with i4t-provider-)
+          sed -i'' -e 's/destination_namespace: \&destination i4t-provider-demo/destination_namespace: \&destination i4t-provider-${{ steps.branch-name.outputs.current_branch }}/g' values.yaml
+          # prefix the application name with the branch name to avoid collisions (prefixed with i4t-provider-)
+          sed -i'' -e 's/release: i4t-provider-demo/release: i4t-provider-${{ steps.branch-name.outputs.current_branch }}/g' values.yaml
+          # set the target revision to the current branch
+          sed -i'' -e 's/branch: \&branch main/branch: \&branch ${{ steps.branch-name.outputs.current_branch }}/g' values.yaml
+          # Replace subdomain in URLs with branch name (prefixed by i4t-provider-)
+          sed -i'' -e 's/i4t-provider-main/i4t-provider-${{ steps.branch-name.outputs.current_branch }}/g' values.yaml
+      
+      # See https://github.com/helm/chart-releaser-action/issues/6
+      - name: Install Helm
+        run: |
+          curl -fsSLo get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+
+      - name: Deploy applications
+        run: |
+          cd i4trust-provider/
+          # render app of apps and apply it
+          helm template ${{ secrets.OVERWRITE_VALUES }} -f values.yaml . | oc -n argocd apply -f -
+          cd ..
+
+      - name: Check if all apps are healthy
+        run: |
+          # wait for the changes to take place and potentially crash the applications
+          sleep 60
+
+          # bool to check if the apps are healthy
+          healthy=0
+          # counter to set a number of tries
+          try=0
+          tries=30
+          # get the list of apps in the namespace 
+          componentsInstalled=$(grep "enabled: true" i4trust-provider/values.yaml -c)
+          # check if the condition is met
+          while [ $healthy == 0 ] && [ $try -lt $tries ]
+          do
+            apps=$(oc get applications.argoproj.io --no-headers -n argocd -l destination-namespace=i4t-provider-${{ steps.branch-name.outputs.current_branch }} | awk '{ print $3 }')
+            healthyapps=0
+            for app in $apps
+            do
+              if [ $app != "Healthy" ]
+              then
+                echo "Trying again in 30 seconds"
+                sleep 30
+                try=$(( try + 1 ))
+                break
+              elif [ $app == "Healthy" ]
+              then  
+                healthyapps=$(( healthyapps + 1 ))
+              fi
+              if [ $healthyapps == $componentsInstalled ]
+              then
+                healthy=1
+              fi
+            done
+          done
+
+          if [ $try -eq $tries ]
+          then
+            echo "ERROR: Tried too many times"
+            exit 1
+          fi
