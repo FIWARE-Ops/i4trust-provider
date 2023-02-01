@@ -47,7 +47,7 @@ pdc-portal:
       scope: "dsba.credentials.presentation.PacketDeliveryService"
 
     # Configuration of external IDPs
-    idp: {}
+    idp: []
       #- name: "Happy Pets Inc."
       #  id: "EU.EORI.DECONSUMERONE"
       #  url: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev"
