@@ -36,9 +36,9 @@ data:
               jws:
                 identifier: {{ .Values.jws.identifier | quote }}
                 private_key: |
-                  {{ .Values.jws.private_key | indent 18 }}
+                  {{ .Values.jws.private_key | nindent 18 }}
                 x5c: |
-                  {{ .Values.jws.x5c | indent 18 }}
+                  {{ .Values.jws.x5c | nindent 18 }}
               
           - name: request-transformer
             config:
