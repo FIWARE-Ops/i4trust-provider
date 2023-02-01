@@ -85,3 +85,22 @@ applications:
             policy: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/ar/policy"
             delegation: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/ar/delegation"
 
+  - name: provider-portal
+    enabled: true
+    source_path: applications/provider-portal
+    source_ref: *branch
+    destination: *destination
+    helm_values:
+    - values.yaml
+    values:
+      pdc-portal:
+        config:
+          external:
+            host: https://provider-portal-i4t-provider-main.apps.fiware.fiware.dev
+          idp: {}
+            #- name: "Happy Pets Inc."
+            #  id: "EU.EORI.DECONSUMERONE"
+            #  url: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev"
+            #  authorize_endpoint: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/oauth2/authorize"
+            #  token_endpoint: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/oauth2/token"
+            
