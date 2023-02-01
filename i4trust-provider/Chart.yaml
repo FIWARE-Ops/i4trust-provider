@@ -1,8 +1,8 @@
 apiVersion: v2
-name: ai-marketplace
-description: Helm chart to deploy the AI-Marketplace components
+name: i4trust-provider
+description: Helm chart to deploy the i4Trust service provider components
 type: application
 version: 0.0.1
 maintainers:
-  - name: Stefan Wiedemann 
-    email: stefan.wiedemann@fiware.org
+  - name: Dennis Wendland
+    email: dennis.wendland@fiware.org
