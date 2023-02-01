@@ -7,14 +7,14 @@ data:
     _format_version: "2.1"
     _transform: true
     services:
-      - host: "provider-orion"
-        name: "provider-orion-packetdelivery"
+      - host: {{ .Values.orion.host | quote }}
+        name: {{ .Values.orion.name | quote }}
         port: 1026
         protocol: http
         routes:
           - name: pdc
             paths:
-              - /packetdelivery
+              - {{ .Values.orion.path }}
             strip_path: true
         plugins:
           - name: ngsi-ishare-policies
@@ -24,17 +24,17 @@ data:
                   - "authorization"
                   - "Authorization"
               ar:
-                identifier: "EU.EORI.DEPROVIDER"
+                identifier: {{ .Values.ar.identifier | quote }}
                 host: {{ .Values.ar.host }}
                 token_endpoint: "{{ .Values.ar.host }}/oauth2/token"
                 delegation_endpoint: "{{ .Values.ar.host }}/ar/delegation"
               satellite:
-                identifier: "EU.EORI.FIWARESATELLITE"
+                identifier: {{ .Values.satellite.identifier | quote }}
                 host: "{{ .Values.satellite.host }}"
                 token_endpoint: "{{ .Values.satellite.host }}/token"
                 trusted_list_endpoint: "{{ .Values.satellite.host }}/trusted_list"
               jws:
-                identifier: "EU.EORI.DEPROVIDER"
+                identifier: {{ .Values.jws.identifier | quote }}
                 private_key: |
                   -----BEGIN RSA PRIVATE KEY-----
                   MIIJKQIBAAKCAgEA48v3//08EA1QzSje+AYjRN1MwoJOlwrk8xOgLz9MZmSYtPv2

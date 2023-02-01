@@ -55,6 +55,17 @@ kong:
 
 ar:
   host: "https://ar.isharetest.net"
+  identifier: "EU.EORI.DEPROVIDER"
 
 satellite:
   host: "https://satellite.i4trust.fiware.dev"
+  identifier: "EU.EORI.FIWARESATELLITE"
+
+jws:
+  identifier: "EU.EORI.DEPROVIDER"
+  
+orion:
+  host: "provider-orion"
+  name: "provider-orion-packetdelivery"
+  path: "/packetdelivery"
+  
