@@ -1,4 +1,4 @@
-{{- if .Values.initScript.createUser.enabled -}}
+{{- if .Values.initScript.createUser.userEnabled -}}
 apiVersion: v1
 kind: Pod
 metadata:

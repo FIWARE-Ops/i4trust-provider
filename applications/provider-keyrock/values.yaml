@@ -258,13 +258,15 @@ keyrock:
 
 ## Init scripts for Keyrock
 initScript:
+  ## Insertion of policy to allow the marketplace to create access policies
   marketplacePolicy:
-    enabled: true
+    policyEnabled: true
     dbName: i4t_provider_idm
     issuer: "EU.EORI.DEPROVIDER"
     target: "EU.EORI.DEMARKETPLACE"
+  ## Creation of users during deployment
   createUser:
-    enabled: true
+    userEnabled: true
     user:
       - username: "provider-operator"
         email: "operator@provider.com"

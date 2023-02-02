@@ -17,6 +17,6 @@ orion:
 
 # Enable initial loading of data from configmap
 initData:
-  enabled: true
+  initEnabled: true
   orionHost: provider-orion.i4t-provider-main.svc.cluster.local:1026
     
