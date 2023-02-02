@@ -4,10 +4,7 @@ on:
   push:
     branches-ignore:
       - main
-    #branches:
-    #  - 'feature-**'
-      
-
+      - 'no-deploy/**'
 
 concurrency: 
     group: ${{ github.ref }}

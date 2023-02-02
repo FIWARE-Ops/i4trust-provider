@@ -27,6 +27,10 @@ repository ([also check this manual](https://github.com/FIWARE-Ops/marinera/blob
 In order to deploy all components, simply create a branch which is named differently than `main`. 
 The GitHub action will deploy all components to the namespace `i4t-provider-{BRANCH_NAME}`. 
 
+* Branches named `no-deploy/**` will not be deployed. This is useful in the case that one first wants to 
+  develop a new configuration without deploying it immediately. For deployment after finishing the development, 
+  one simply creates a branch out of the `no-deploy/**` branch named differently than `main` and `no-deploy/**`.
+
 Routes for externally exposed services are automatically created and hostnames are set dynamically. In order to 
 retrieve the created hostnames, one can run, e.g., 
 ```shell
