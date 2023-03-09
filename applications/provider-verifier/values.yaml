@@ -5,7 +5,7 @@ vcverifier:
       pullPolicy: Always
     protectedResource: https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/orion-vc/ngsi-ld/v1
     tirAddress: https://satellite.i4trust.fiware.dev/trusted_issuer/v3/issuers/
-    #did: did:key:abc
+    did: did:key:z6Mki5QesVQe4z7guF4k9SWn3U9Ji3117Tpmn9BFfpNoc2vT
     walt:
       coreUrl: http://provider-waltid-vcwaltid:7000
       signatoryUrl: http://provider-waltid-vcwaltid:7001
