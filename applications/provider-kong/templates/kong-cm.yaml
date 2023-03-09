@@ -1,12 +1,35 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: provider-kong-cm
+  name: {{ .Values.kong.dblessConfig.configMap }}
 data:
   kong.yml: |
     _format_version: "2.1"
     _transform: true
     services:
+      - host: {{ .Values.orion.host | quote }}
+        name: {{ .Values.orion.name | quote }}
+        port: 1026
+        protocol: http
+        routes:
+          - name: pdc-vc
+            paths:
+              - {{ .Values.orion.pathVc }}
+            strip_path: true
+        plugins:
+          - name: pep-plugin
+            config:
+              pathprefix: {{ .Values.orion.pathVc | quote }}
+              authorizationendpointtype: ExtAuthz
+              authorizationendpointaddress: http://provider-dsba-pdp:8080/authz
+                
+          - name: request-transformer
+            config:
+              remove:
+                headers:
+                  - Authorization
+                  - authorization
+                  
       - host: {{ .Values.orion.host | quote }}
         name: {{ .Values.orion.name | quote }}
         port: 1026

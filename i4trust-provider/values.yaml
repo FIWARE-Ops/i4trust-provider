@@ -25,6 +25,15 @@ applications:
     helm_values:
     - values.yaml
 
+  - name: ishare-satellite
+    enabled: true
+    source_path: applications/satellite
+    source_ref: main
+    destination: *destination
+    purpose: *purpose
+    helm_values:
+    - values.yaml
+
   - name: provider-orion
     enabled: true
     source_path: applications/provider-orion
@@ -113,4 +122,19 @@ applications:
     purpose: *purpose
     helm_values:
     - values.yaml
-            
+
+  - name: provider-verifier
+    enabled: true
+    source_path: applications/provider-verifier
+    source_ref: *branch
+    destination: *destination
+    purpose: *purpose
+    helm_values:
+    - values.yaml
+    values:
+      vcverifier:
+        deployment:
+          protectedResource: https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/orion-vc/ngsi-ld/v1
+          tirAddress: https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev/trusted_issuer/v3/issuers/
+
+  
