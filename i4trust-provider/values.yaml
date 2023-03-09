@@ -103,4 +103,13 @@ applications:
             #  url: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev"
             #  authorize_endpoint: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/oauth2/authorize"
             #  token_endpoint: "https://consumer-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev/oauth2/token"
+
+  - name: provider-waltid
+    enabled: true
+    source_path: applications/provider-waltid
+    source_ref: *branch
+    destination: *destination
+    purpose: *purpose
+    helm_values:
+    - values.yaml
             
