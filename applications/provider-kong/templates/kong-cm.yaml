@@ -21,7 +21,7 @@ data:
             config:
               pathprefix: {{ .Values.orion.pathVc | quote }}
               authorizationendpointtype: ExtAuthz
-              authorizationendpointaddress: http://provider-dsba-pdp:8080/authz
+              authorizationendpointaddress: {{ .Values.pdp.authorizationendpointaddress }}
                 
           - name: request-transformer
             config:

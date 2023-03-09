@@ -137,4 +137,21 @@ applications:
           protectedResource: https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/orion-vc/ngsi-ld/v1
           tirAddress: https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev/trusted_issuer/v3/issuers/
 
-  
+  - name: provider-dsba-pdp
+    enabled: true
+    source_path: applications/provider-dsba-pdp
+    source_ref: *branch
+    destination: *destination
+    purpose: *purpose
+    helm_values:
+    - values.yaml
+    values:
+      dsba-pdp:
+        deployment:
+          ishare:
+            ar:
+              url: "https://provider-keyrock-0-i4t-provider-main.apps.fiware.fiware.dev"
+            trustAnchor:
+              url: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev"
+          trustedVerifiers:
+            - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/.well-known/jwks

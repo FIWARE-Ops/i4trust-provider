@@ -71,6 +71,9 @@ orion:
   path: "/packetdelivery"
   pathVc: "/packetdelivery-vc"
 
+pdp:
+  authorizationendpointaddress: http://provider-dsba-pdp:8080/authz
+
 jws:
   identifier: "EU.EORI.DEPROVIDER"
   private_key: |
