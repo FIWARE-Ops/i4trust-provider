@@ -4,6 +4,7 @@
 source: https://github.com/FIWARE-Ops/i4trust-provider
 release: i4t-provider-demo
 destination_namespace: &destination i4t-provider-demo
+purpose: &purpose i4trust-provider-env
 branch: &branch main
 secretsEnabled: &secretsEnabled false
 
