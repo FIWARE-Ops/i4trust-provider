@@ -73,9 +73,9 @@ data:
       "target", JSON_OBJECT(
         "accessSubject", @subjectGold
       ),
-      "notBefore", {{ .Values.rolePolicy.notBefore }},
-      "notOnOrAfter", {{ .Values.rolePolicy.notOnOrAfter }},
-      "policyIssuer", {{ .Values.rolePolicy.issuer | quote }},
+      "notBefore", {{ .Values.initScript.rolePolicy.notBefore }},
+      "notOnOrAfter", {{ .Values.initScript.rolePolicy.notOnOrAfter }},
+      "policyIssuer", {{ .Values.initScript.rolePolicy.issuer | quote }},
       "policySets", JSON_ARRAY(
         JSON_OBJECT(
           "target", JSON_OBJECT(
@@ -87,16 +87,16 @@ data:
         )
       )
     );
-    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.rolePolicy.issuer | quote }}, @subjectGold, @delegationGold);
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.rolePolicy.issuer | quote }}, @subjectGold, @delegationGold);
     
     -- Insert Delegation Evidence Standard
     SET @delegationStandard := JSON_OBJECT(
       "target", JSON_OBJECT(
         "accessSubject", @subjectStandard
       ),
-      "notBefore", {{ .Values.rolePolicy.notBefore }},
-      "notOnOrAfter", {{ .Values.rolePolicy.notOnOrAfter }},
-      "policyIssuer", {{ .Values.rolePolicy.issuer | quote }},
+      "notBefore", {{ .Values.initScript.rolePolicy.notBefore }},
+      "notOnOrAfter", {{ .Values.initScript.rolePolicy.notOnOrAfter }},
+      "policyIssuer", {{ .Values.initScript.rolePolicy.issuer | quote }},
       "policySets", JSON_ARRAY(
         JSON_OBJECT(
           "target", JSON_OBJECT(
@@ -108,7 +108,7 @@ data:
         )
       )
     );
-    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.rolePolicy.issuer | quote }}, @subjectStandard, @delegationStandard);
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.rolePolicy.issuer | quote }}, @subjectStandard, @delegationStandard);
     
     {{- end }}
     
