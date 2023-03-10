@@ -225,7 +225,7 @@ ishare-satellite:
     parties:
       - id: "EU.EORI.DEPROVIDER"
         name: "PacketDelivery"
-        did: "did:key:z6Mki5QesVQe4z7guF4k9SWn3U9Ji3117Tpmn9BFfpNoc2vT"
+        did: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
         status: "Active"
         start_date: "2021-09-27T00:00:00Z"
         end_date: "2051-09-27T00:00:00Z"

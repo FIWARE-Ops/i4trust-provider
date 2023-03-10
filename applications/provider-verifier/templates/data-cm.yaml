@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: provider-verifier-data-cm
+data:
+  keyfile.json: |-
+    {
+      "kty": {{ .Values.issuerKey.kty | quote }},
+      "d": {{ .Values.issuerKey.d | quote }},
+      "use": {{ .Values.issuerKey.use | quote }},
+      "crv": {{ .Values.issuerKey.crv | quote }},
+      "kid": {{ .Values.issuerKey.kid | quote }},
+      "x": {{ .Values.issuerKey.x | quote }},
+      "alg": {{ .Values.issuerKey.alg | quote }}
+    }

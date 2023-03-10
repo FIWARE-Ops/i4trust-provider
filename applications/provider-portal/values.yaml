@@ -42,7 +42,7 @@ pdc-portal:
       # Base uri of the verifier
       verifier_uri: provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev
       # DID of verifier
-      did: "did:key:z6MkigCEnopwujz8Ten2dzq91nvMjqbKQYcifuZhqBsEkH7g"
+      did: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
       # Type of credential that the Verifier will accept
       scope: "dsba.credentials.presentation.PacketDeliveryService"
 

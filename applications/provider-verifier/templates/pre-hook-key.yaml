@@ -1,0 +1,36 @@
+{{- if .Values.issuerKey.initEnabled -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: provider-verifier-data-{{ randAlphaNum 5 | lower }}
+  annotations:
+    "helm.sh/hook": pre-install
+    "helm.sh/hook-weight": "-2"
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: provider-verifier-init-data
+          image: alpine/curl
+          command: 
+            - sh
+            - -c
+            - |
+              curl -X POST ${WALTID_HOST}/v1/key/import -H "Content-Type: application/json" -d @/data/keyfile.json &&
+              curl -X POST http://provider-waltid-vcwaltid:7000/v1/did/import?keyId={{ .Values.issuerKey.kid }} --data {{ .Values.vcverifier.deployment.did | quote }}
+          volumeMounts:
+            - name: provider-verifier-init-data-volume
+              mountPath: "/data"
+              readOnly: true
+          env:
+            - name: WALTID_HOST
+              value: {{ .Values.vcverifier.deployment.walt.coreUrl | quote }}
+      volumes:
+        - name: provider-verifier-init-data-volume
+          projected:
+            sources:
+              - configMap:
+                  name: provider-verifier-data-cm
+{{- end }}

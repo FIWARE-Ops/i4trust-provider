@@ -189,4 +189,4 @@ dsba-pdp:
     trustedVerifiers:
       - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/.well-known/jwks
 
-    providerId: "did:key:z6MkigCEnopwujz8Ten2dzq91nvMjqbKQYcifuZhqBsEkH7g"
+    providerId: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
