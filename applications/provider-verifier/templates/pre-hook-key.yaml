@@ -18,7 +18,7 @@ spec:
             - sh
             - -c
             - |
-              curl -X POST ${WALTID_HOST}/v1/key/import -H "Content-Type: application/json" -d @/data/keyfile.json &&
+              curl -X POST ${WALTID_HOST}/v1/key/import -H "Content-Type: application/json" -d '{"kty": {{ .Values.issuerKey.kty | quote }}, "d": {{ .Values.issuerKey.d | quote }}, "use": {{ .Values.issuerKey.use | quote }}, "crv": {{ .Values.issuerKey.crv | quote }}, "kid": {{ .Values.issuerKey.kid | quote }}, "x": {{ .Values.issuerKey.x | quote }}, "alg": {{ .Values.issuerKey.alg | quote }} }' &&
               curl -X POST ${WALTID_HOST}/v1/did/import?keyId={{ .Values.issuerKey.kid }} --data {{ .Values.vcverifier.deployment.did | quote }}
           volumeMounts:
             - name: provider-verifier-init-data-volume
