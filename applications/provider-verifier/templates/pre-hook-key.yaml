@@ -19,7 +19,7 @@ spec:
             - -c
             - |
               curl -X POST ${WALTID_HOST}/v1/key/import -H "Content-Type: application/json" -d @/data/keyfile.json &&
-              curl -X POST http://provider-waltid-vcwaltid:7000/v1/did/import?keyId={{ .Values.issuerKey.kid }} --data {{ .Values.vcverifier.deployment.did | quote }}
+              curl -X POST ${WALTID_HOST}/v1/did/import?keyId={{ .Values.issuerKey.kid }} --data {{ .Values.vcverifier.deployment.did | quote }}
           volumeMounts:
             - name: provider-verifier-init-data-volume
               mountPath: "/data"
