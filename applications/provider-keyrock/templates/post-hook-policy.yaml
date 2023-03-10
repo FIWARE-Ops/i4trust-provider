@@ -1,4 +1,4 @@
-{{- if .Values.initScript.marketplacePolicy.policyEnabled -}}
+{{- if or .Values.initScript.marketplacePolicy.policyEnabled .Values.initScript.rolePolicy.policyEnabled -}}
 apiVersion: v1
 kind: Pod
 metadata:

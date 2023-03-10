@@ -271,6 +271,12 @@ initScript:
       - username: "provider-operator"
         email: "operator@provider.com"
         password: "operator"
+  ## Creation of role mapping policies during deployment
+  rolePolicy:
+    policyEnabled: true
+    issuer: "EU.EORI.DEPROVIDER"
+    notBefore: "1616583866"
+    notOnOrAfter: "1735817171"
 
     
   

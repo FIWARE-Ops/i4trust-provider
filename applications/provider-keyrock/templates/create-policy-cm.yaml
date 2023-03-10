@@ -10,7 +10,107 @@ data:
   create.sh: |-
     mysql -h {{ .Values.keyrock.db.host }} -u {{ .Values.keyrock.db.user }} -p$DB_PASSWORD {{ .Values.initScript.marketplacePolicy.dbName }} <<EOF
 
+    {{- if .Values.initScript.marketplacePolicy.policyEnabled -}}
+
     INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.marketplacePolicy.issuer | quote }}, {{ .Values.initScript.marketplacePolicy.target | quote }}, '{"target": {"accessSubject": {{ .Values.initScript.marketplacePolicy.target | quote }} }, "notBefore": 1616583866, "policySets": [{"target": {"environment": {"licenses": ["ISHARE.0001"]}}, "policies": [{"rules": [{"effect": "Permit"}], "target": {"actions": ["POST"], "resource": {"type": "delegationEvidence", "attributes": ["*"], "identifiers": ["*"]}}}]}], "notOnOrAfter": 1735817171, "policyIssuer": {{ .Values.initScript.marketplacePolicy.issuer | quote }} }');
 
+    {{- end }}
+
+    {{- if .Values.initScript.rolePolicy.policyEnabled -}}
+
+    -- Static objects
+    SET @rules := JSON_ARRAY(
+      JSON_OBJECT(
+        "effect", "Permit"
+      )
+    );
+    SET @subjectGold := "GOLD_CUSTOMER";
+    SET @subjectStandard := "STANDARD_CUSTOMER";
+
+    -- Policies Gold
+    SET @policiesGold := JSON_ARRAY(
+      JSON_OBJECT(
+        "rules", CAST(@rules as JSON),
+        "target", JSON_OBJECT(
+          "actions", JSON_ARRAY("PATCH"),
+          "resource", JSON_OBJECT(
+            "type", "DELIVERYORDER",
+            "attributes", JSON_ARRAY("pta","pda"),
+            "identifiers", JSON_ARRAY("*")
+          )
+        )
+      ),
+      JSON_OBJECT(
+        "rules", CAST(@rules as JSON),
+        "target", JSON_OBJECT(
+          "actions", JSON_ARRAY("GET"),
+          "resource", JSON_OBJECT(
+            "type", "DELIVERYORDER",
+            "attributes", JSON_ARRAY("*"),
+            "identifiers", JSON_ARRAY("*")
+          )
+        )
+      )
+    );
+
+    -- Policies Standard
+    SET @policiesStandard := JSON_ARRAY(
+      JSON_OBJECT(
+        "rules", CAST(@rules as JSON),
+        "target", JSON_OBJECT(
+          "actions", JSON_ARRAY("GET"),
+          "resource", JSON_OBJECT(
+            "type", "DELIVERYORDER",
+            "attributes", JSON_ARRAY("*"),
+            "identifiers", JSON_ARRAY("*")
+          )
+        )
+      )
+    );
+
+    -- Insert Delegation Evidence Gold
+    SET @delegationGold := JSON_OBJECT(
+      "target", JSON_OBJECT(
+        "accessSubject", @subjectGold
+      ),
+      "notBefore", {{ .Values.rolePolicy.notBefore }},
+      "notOnOrAfter", {{ .Values.rolePolicy.notOnOrAfter }},
+      "policyIssuer", {{ .Values.rolePolicy.issuer | quote }},
+      "policySets", JSON_ARRAY(
+        JSON_OBJECT(
+          "target", JSON_OBJECT(
+            "environment", JSON_OBJECT(
+              "licenses", JSON_ARRAY("ISHARE.0001")
+            )
+          ),
+          "policies", CAST(@policiesGold as JSON)
+        )
+      )
+    );
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.rolePolicy.issuer | quote }}, @subjectGold, @delegationGold);
+    
+    -- Insert Delegation Evidence Standard
+    SET @delegationStandard := JSON_OBJECT(
+      "target", JSON_OBJECT(
+        "accessSubject", @subjectStandard
+      ),
+      "notBefore", {{ .Values.rolePolicy.notBefore }},
+      "notOnOrAfter", {{ .Values.rolePolicy.notOnOrAfter }},
+      "policyIssuer", {{ .Values.rolePolicy.issuer | quote }},
+      "policySets", JSON_ARRAY(
+        JSON_OBJECT(
+          "target", JSON_OBJECT(
+            "environment", JSON_OBJECT(
+              "licenses", JSON_ARRAY("ISHARE.0001")
+            )
+          ),
+          "policies", CAST(@policiesStandard as JSON)
+        )
+      )
+    );
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.rolePolicy.issuer | quote }}, @subjectStandard, @delegationStandard);
+    
+    {{- end }}
+    
     COMMIT;
     EOF
