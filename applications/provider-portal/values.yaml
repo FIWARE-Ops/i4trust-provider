@@ -27,7 +27,7 @@ pdc-portal:
 
     cb:
       endpoint: "https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/packetdelivery/ngsi-ld/v1"
-      endpoint_siop: "https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/orion-vc/ngsi-ld/v1"
+      endpoint_siop: "https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/packetdelivery-vc/ngsi-ld/v1"
     
     express:
       port: 7000
@@ -36,13 +36,13 @@ pdc-portal:
     # Configuration for SIOP flow
     siop:
       # SIOP flow enabled
-      enabled: false
+      enabled: true
       # Redirect URI that the wallet will use to send the VC/VP
-      redirect_uri: https://provider-vcbackend-i4t-provider-main.apps.fiware.fiware.dev/verifier/api/v1/authenticationresponse
+      redirect_uri: https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/api/v1/authenticationresponse
       # Base uri of the verifier
-      verifier_uri: https://provider-vcbackend-i4t-provider-main.apps.fiware.fiware.dev
+      verifier_uri: provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev
       # DID of verifier
-      did: "did:key:z6MkufEFkFSCXg1DHUsZbYuWcGf4QHat34YSoVgs67ED9m4S"
+      did: "did:key:z6MkigCEnopwujz8Ten2dzq91nvMjqbKQYcifuZhqBsEkH7g"
       # Type of credential that the Verifier will accept
       scope: "dsba.credentials.presentation.PacketDeliveryService"
 
