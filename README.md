@@ -58,7 +58,7 @@ Different accounts are created automatically with default passwords.
 Root CA, keys and certificates have been created and self-signed using openssl. Keys and certificates used for this demonstrator 
 can be found in the [certs folder](./certs). These should never be used in any kind of production enviroment or on a 
 contineously running environment.  
-Below table displays the assigned EORIs assigned to the different organisations and their keys/certificates:
-| Organisation           | EORI                       |
-|------------------------|----------------------------|
-| Provider               | EU.EORI.DEPROVIDER         |
+Below table displays the assigned EORIs and DIDs assigned to the different organisations and their keys/certificates:
+| Organisation           | EORI                       | DID                                |
+|------------------------|----------------------------|------------------------------------|
+| Provider               | EU.EORI.DEPROVIDER         | did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr |
