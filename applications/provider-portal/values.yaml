@@ -26,7 +26,7 @@ pdc-portal:
 
     cb:
       endpoint: "https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/packetdelivery/ngsi-ld/v1"
-      endpoint_siop: "https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/packetdelivery-vc/ngsi-ld/v1"
+      endpoint_siop: "https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/vc/ngsi-ld/v1"
     
     express:
       port: 7000
