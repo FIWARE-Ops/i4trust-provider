@@ -8,7 +8,7 @@ data:
     _transform: true
     services:
       - host: {{ .Values.orion.host | quote }}
-        name: vc-{{ .Values.orion.name | quote }}
+        name: vc-{{ .Values.orion.name }}
         port: 1026
         protocol: http
         routes:
