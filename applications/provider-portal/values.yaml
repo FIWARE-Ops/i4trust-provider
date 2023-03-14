@@ -39,7 +39,7 @@ pdc-portal:
       # Redirect URI that the wallet will use to send the VC/VP
       redirect_uri: https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/api/v1/authenticationresponse
       # Base uri of the verifier
-      verifier_uri: provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev
+      verifier_uri: https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev
       # DID of verifier
       did: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
       # Type of credential that the Verifier will accept
