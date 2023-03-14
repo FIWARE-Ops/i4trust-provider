@@ -3,7 +3,7 @@ pdc-portal:
     image:
       repository: i4trust/pdc-portal
       tag: 2.1.1-PRE-10
-      pullPolicy: Always
+      pullPolicy: IfNotPresent
 
   route:
     enabled: true
