@@ -1,7 +1,7 @@
 keyrock:
   statefulset:
     image:
-      repository: fiware/idm
+      repository: quay.io/wi_stefan/idm
       tag: 8.3.0
       #pullPolicy: Always
       pullPolicy: IfNotPresent
@@ -35,7 +35,7 @@ keyrock:
     ## -- Size of PVCs to be created
     size: 1Gi
     ## Image which holds the theme files
-    image: i4trust/keyrock-theme-pdc:1.0.0
+    image: quay.io/wi_stefan/keyrock-theme-pdc:1.0.0
     ## -- specification of the image pull policy
     imagePullPolicy: Always
     ## Path to the source theme files inside the container
@@ -281,6 +281,5 @@ initScript:
     issuer: "EU.EORI.DEPROVIDER"
     notBefore: "1616583866"
     notOnOrAfter: "1735817171"
-
-    
+    issuerDid: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
   

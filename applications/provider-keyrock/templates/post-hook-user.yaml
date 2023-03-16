@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: provider-keyrock-user-create
-      image: python:3
+      image: quay.io/wi_stefan/python:3
       command:
         - /bin/sh
         - /scripts/entrypoint.sh

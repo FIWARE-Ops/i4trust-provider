@@ -10,7 +10,7 @@ metadata:
 spec:
   containers:
     - name: policy-create
-      image: mysql:5.7
+      image: quay.io/wi_stefan/mysql:5.7
       command: 
         - /bin/sh
         - /scripts/create.sh

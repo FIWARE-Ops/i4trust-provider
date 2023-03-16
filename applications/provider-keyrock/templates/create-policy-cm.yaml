@@ -24,6 +24,7 @@ data:
         "effect", "Permit"
       )
     );
+
     SET @subjectGold := "GOLD_CUSTOMER";
     SET @subjectStandard := "STANDARD_CUSTOMER";
 
@@ -88,7 +89,28 @@ data:
       )
     );
     INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.rolePolicy.issuer | quote }}, @subjectGold, @delegationGold);
-    
+  
+    -- Insert Delegation Evidence Gold VC
+    SET @delegationGoldVC := JSON_OBJECT(
+      "target", JSON_OBJECT(
+        "accessSubject", @subjectGold
+      ),
+      "notBefore", {{ .Values.initScript.rolePolicy.notBefore }},
+      "notOnOrAfter", {{ .Values.initScript.rolePolicy.notOnOrAfter }},
+      "policyIssuer", {{ .Values.initScript.rolePolicy.issuerDid | quote }},
+      "policySets", JSON_ARRAY(
+        JSON_OBJECT(
+          "target", JSON_OBJECT(
+            "environment", JSON_OBJECT(
+              "licenses", JSON_ARRAY("ISHARE.0001")
+            )
+          ),
+          "policies", CAST(@policiesGold as JSON)
+        )
+      )
+    );
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.rolePolicy.issuerDid | quote }}, @subjectGold, @delegationGoldVC);
+
     -- Insert Delegation Evidence Standard
     SET @delegationStandard := JSON_OBJECT(
       "target", JSON_OBJECT(
@@ -109,7 +131,28 @@ data:
       )
     );
     INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.rolePolicy.issuer | quote }}, @subjectStandard, @delegationStandard);
-    
+
+    -- Insert Delegation Evidence Standard VC
+    SET @delegationStandardVC := JSON_OBJECT(
+      "target", JSON_OBJECT(
+        "accessSubject", @subjectStandard
+      ),
+      "notBefore", {{ .Values.initScript.rolePolicy.notBefore }},
+      "notOnOrAfter", {{ .Values.initScript.rolePolicy.notOnOrAfter }},
+      "policyIssuer", {{ .Values.initScript.rolePolicy.issuerDid | quote }},
+      "policySets", JSON_ARRAY(
+        JSON_OBJECT(
+          "target", JSON_OBJECT(
+            "environment", JSON_OBJECT(
+              "licenses", JSON_ARRAY("ISHARE.0001")
+            )
+          ),
+          "policies", CAST(@policiesStandard as JSON)
+        )
+      )
+    );
+    INSERT IGNORE INTO delegation_evidence (policy_issuer, access_subject,policy) VALUES ({{ .Values.initScript.rolePolicy.issuerDid | quote }}, @subjectStandard, @delegationStandardVC);
+
     {{- end }}
     
     COMMIT;

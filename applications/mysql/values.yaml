@@ -8,7 +8,7 @@ mysql:
   #   *.apps.fiware.fiware.dev
   #
 
-  image: "mysql"
+  image: "quay.io/wi_stefan/mysql"
   imageTag: "5.7"
 
   ## Specify password for root user
