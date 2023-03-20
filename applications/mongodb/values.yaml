@@ -14,7 +14,7 @@ mongodb:
     registry: quay.io
     ## Bitnami MongoDB image name
     ##
-    repository: fiware/mongodb
+    repository: i4trust/mongodb
     ## Bitnami MongoDB image tag
     ## ref: https://hub.docker.com/r/bitnami/mongodb/tags/
     ##
