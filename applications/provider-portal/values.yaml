@@ -1,7 +1,7 @@
 pdc-portal:
   deployment:
     image:
-      repository: i4trust/pdc-portal
+      repository: quay.io/i4trust/pdc-portal
       tag: 2.1.1-PRE-10
       pullPolicy: IfNotPresent
 

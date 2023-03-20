@@ -11,10 +11,10 @@ mongodb:
   image:
     ## Bitnami MongoDB registry
     ##
-    registry: docker.io
+    registry: quay.io
     ## Bitnami MongoDB image name
     ##
-    repository: bitnami/mongodb
+    repository: fiware/mongodb
     ## Bitnami MongoDB image tag
     ## ref: https://hub.docker.com/r/bitnami/mongodb/tags/
     ##
