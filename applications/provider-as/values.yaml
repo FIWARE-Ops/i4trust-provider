@@ -184,7 +184,7 @@ activation-service:
       port: 7000
 
     db:
-      source: ":memory:"
+      source: "as.sqlite"
 
     ar:
       # Endpoint for token request
