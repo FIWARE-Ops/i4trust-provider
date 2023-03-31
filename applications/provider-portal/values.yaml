@@ -4,6 +4,10 @@ pdc-portal:
       repository: quay.io/i4trust/pdc-portal
       tag: 2.4.0-PRE-11
       pullPolicy: IfNotPresent
+    livenessProbe:
+      initialDelaySeconds: 4
+    readinessProbe:
+      initialDelaySeconds: 5
 
   route:
     enabled: true
@@ -16,6 +20,8 @@ pdc-portal:
 
   config:
     title: "Packet Delivery Portal"
+    getLabel: "Delivery Order"
+    inputLabel: "Packet Delivery ID"
   
     external:
       host: https://pdc-portal.i4trust.fiware.dev
@@ -37,13 +43,13 @@ pdc-portal:
       # SIOP flow enabled
       enabled: true
       # Redirect URI that the wallet will use to send the VC/VP
-      redirect_uri: https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/api/v1/authenticationresponse
+      #redirect_uri: https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/api/v1/authenticationresponse
       # Base uri of the verifier
       verifier_uri: https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev
       # DID of verifier
       did: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
       # Type of credential that the Verifier will accept
-      scope: "dsba.credentials.presentation.PacketDeliveryService"
+      #scope: "dsba.credentials.presentation.PacketDeliveryService"
 
     # Configuration of external IDPs
     idp: []
