@@ -31,6 +31,7 @@ vcverifier:
 
 issuerKey:
   initEnabled: true
+  waltCoreUrl: http://provider-waltid-vcwaltid:7000
   kty: "OKP"
   d: "WgcX0y0OZxlA6FtLk6m3lwy_sZMvKazVax9ER10T7xY"
   use: "sig"
