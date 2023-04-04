@@ -187,6 +187,6 @@ dsba-pdp:
         url: "https://satellite.i4trust.fiware.dev"
         
     trustedVerifiers:
-      - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/.well-known/jwks
+      - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/.well-known/jwks
 
     providerId: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"

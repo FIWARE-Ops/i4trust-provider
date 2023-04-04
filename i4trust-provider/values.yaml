@@ -162,4 +162,4 @@ applications:
             trustAnchor:
               url: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev"
           trustedVerifiers:
-            - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/verifier/.well-known/jwks
+            - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/.well-known/jwks
