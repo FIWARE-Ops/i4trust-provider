@@ -1,10 +1,10 @@
 pdc-portal:
   deployment:
     image:
-      #repository: quay.io/i4trust/pdc-portal
-      tag: 2.4.1-PRE
-      repository: quay.io/wi_stefan/demo-portal
-      #tag: 0.0.1
+      repository: quay.io/i4trust/pdc-portal
+      #tag: 2.4.1-PRE
+      #repository: quay.io/wi_stefan/demo-portal
+      tag: 2.5.0
       pullPolicy: IfNotPresent
     livenessProbe:
       initialDelaySeconds: 4
