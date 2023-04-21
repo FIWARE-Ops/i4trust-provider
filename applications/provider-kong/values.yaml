@@ -43,6 +43,7 @@ kong:
   
   proxy:
     enabled: true
+    type: ClusterIP
     annotations: {}
     tls:
       enabled: false
