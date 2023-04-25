@@ -6,7 +6,7 @@ keyrock:
       #pullPolicy: Always
       pullPolicy: IfNotPresent
     startupProbe:
-      initialDelaySeconds: 30
+      initialDelaySeconds: 60
       periodSeconds: 10
       failureThreshold: 10
 
