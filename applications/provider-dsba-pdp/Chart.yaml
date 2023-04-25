@@ -4,7 +4,7 @@ description: Chart holder for argo-cd
 
 type: application
 version: 0.0.16
-appVersion: "0.3.4"
+appVersion: "0.3.6"
 
 dependencies:
   - name: dsba-pdp
