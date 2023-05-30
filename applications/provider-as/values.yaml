@@ -2,21 +2,27 @@ activation-service:
   deployment:
     image:
       repository: quay.io/i4trust/activation-service
-      tag: 1.3.1
-      #tag: 2.0.0-PRE-14
-      #pullPolicy: Always
-      pullPolicy: IfNotPresent
+      #tag: 1.3.1
+      tag: 2.0.0-PRE-15
+      pullPolicy: Always
+      #pullPolicy: IfNotPresent
 
   route:
     enabled: true
     tls:
       termination: edge
       insecureEdgeTerminationPolicy: Redirect
-    
-  debug:
-    enabled: true
 
-  maxHttpHeaderSize: 32768
+  ## Configuration of activation service execution
+  activationService:
+    # -- Listen port
+    port: 8080
+    # -- Number of (gunicorn) workers that should be created
+    workers: 1
+    # -- Maximum header size in bytes
+    maxHeaderSize: 32768
+    # -- Log Level
+    logLevel: "debug"
 
   config:
     client:
@@ -180,12 +186,13 @@ activation-service:
         gty2Gjmr0kunFqqelUzoqMc7Jh/8EPPjVpK3gJUdZM4JlSHZjA==
         -----END CERTIFICATE-----
 
-    express:
-      port: 7000
-
     db:
-      #source: "as.sqlite"
-      source: ":memory:"
+      # -- Use sqlite in-memory database
+      useMemory: true
+      # -- Enable tracking of modifications
+      modTracking: false
+      # -- Enable SQL logging to stderr
+      echo: true
 
     ar:
       # Endpoint for token request
@@ -196,5 +203,4 @@ activation-service:
       delegation: "https://ar.isharetest.net/delegation"
       # EORI of AR
       id: "EU.EORI.DEPROVIDER"
-      # Disable SSL verification
-      rejectUnauthorized: false
+
