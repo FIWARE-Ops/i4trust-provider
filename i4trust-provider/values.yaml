@@ -163,3 +163,12 @@ applications:
               url: "https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev"
           trustedVerifiers:
             - https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev/.well-known/jwks
+
+  - name: provider-ccs
+    enabled: true
+    source_path: applications/provider-ccs
+    source_ref: *branch
+    destination: *destination
+    purpose: *purpose
+    helm_values:
+    - values.yaml
