@@ -142,7 +142,8 @@ applications:
         deployment:
           verifier:
             tirAddress: https://ishare-satellite-i4t-provider-main.apps.fiware.fiware.dev/trusted_issuer/v3/issuers/
-          #protectedResource: https://provider-kong-kong-i4t-provider-main.apps.fiware.fiware.dev/orion-vc/ngsi-ld/v1
+          configRepo:
+            configEndpoint: http://pdc-ccs-credentials-config-service:8080/
           
 
   - name: provider-dsba-pdp
@@ -174,7 +175,7 @@ applications:
     - values.yaml
     values:
       service:
-        createServiceConfig: true
+        createServiceConfig: false
         ccsHost: "http://pdc-ccs-credentials-config-service:8080"
         credentials:
           - type: VerifiableCredential

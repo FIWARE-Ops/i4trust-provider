@@ -14,7 +14,7 @@ credentials-config-service:
     persistence: false
 
 service:
-  createServiceConfig: true
+  createServiceConfig: false
   ccsHost: "http://pdc-ccs-credentials-config-service:8080"
   id: packet-delivery-service
   credentials:
