@@ -18,21 +18,21 @@ vcverifier:
       did: did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr
     configRepo:
       configEndpoint: http://pdc-ccs-credentials-config-service:8080/
-      services:
-        packetDeliveryService:
-          scope: 
-            - VerifiableCredential
-            - PacketDeliveryService
-          trustedParticipants:
-            VerifiableCredential:
-              - https://tir-pdc.gaia-x.fiware.dev
-            PacketDeliveryService:
-              - https://tir-pdc.gaia-x.fiware.dev
-          trustedIssuers:
-            VerifiableCredential:
-              - http://pdc-til-trusted-issuers-list:8080
-            PacketDeliveryService:
-              - http://pdc-til-trusted-issuers-list:8080
+      #services:
+      #  packetDeliveryService:
+      #    scope: 
+      #      - VerifiableCredential
+      #      - PacketDeliveryService
+      #    trustedParticipants:
+      #      VerifiableCredential:
+      #        - https://tir-pdc.gaia-x.fiware.dev
+      #      PacketDeliveryService:
+      #        - https://tir-pdc.gaia-x.fiware.dev
+      #    trustedIssuers:
+      #      VerifiableCredential:
+      #        - http://pdc-til-trusted-issuers-list:8080
+      #      PacketDeliveryService:
+      #        - http://pdc-til-trusted-issuers-list:8080
     
   route:
     enabled: true

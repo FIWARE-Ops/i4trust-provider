@@ -3,24 +3,52 @@ kind: ConfigMap
 metadata:
   name: provider-ccs-data-cm
 data:
-  service.json: |
+  service_pds.json: |
     {
-      "id": {{ .Values.service.id | quote }},
+      "id": {{ .Values.service.idPDS | quote }},
       "credentials": [
-        {{- range $ck, $c := .Values.service.credentials }}
         {
-          "type": {{ $c.type | quote }},
+          "type": "VerifiableCredential",
           "trustedParticipantsLists": [
-            {{- range $pk, $p := $c.trustedParticipantsLists }}
-            {{ $p | quote }},
-            {{- end }}
+            {{ .Values.service.trustedParticipantsLists | quote }}
           ],
           "trustedIssuersLists": [
-            {{- range $ik, $i := $c.trustedIssuersLists }}
-            {{ $i | quote }},
-            {{- end }}
+            {{ .Values.service.trustedIssuersLists | quote }}
           ]
         },
-        {{- end }}
+        {
+          "type": "PacketDeliveryService",
+          "trustedParticipantsLists": [
+            {{ .Values.service.trustedParticipantsLists | quote }}
+          ],
+          "trustedIssuersLists": [
+            {{ .Values.service.trustedIssuersLists | quote }}
+          ]
+        }
+      ]
+    }
+
+  service_as.json: |
+    {
+      "id": {{ .Values.service.idAS | quote }},
+      "credentials": [
+        {
+          "type": "VerifiableCredential",
+          "trustedParticipantsLists": [
+            {{ .Values.service.trustedParticipantsLists | quote }}
+          ],
+          "trustedIssuersLists": [
+            {{ .Values.service.trustedIssuersLists | quote }}
+          ]
+        },
+        {
+          "type": "ActivationService",
+          "trustedParticipantsLists": [
+            {{ .Values.service.trustedParticipantsLists | quote }}
+          ],
+          "trustedIssuersLists": [
+            {{ .Values.service.trustedIssuersLists | quote }}
+          ]
+        }
       ]
     }

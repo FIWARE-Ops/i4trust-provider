@@ -175,19 +175,8 @@ applications:
     - values.yaml
     values:
       service:
-        createServiceConfig: false
+        createServiceConfig: true
         ccsHost: "http://pdc-ccs-credentials-config-service:8080"
-        credentials:
-          - type: VerifiableCredential
-            trustedParticipantsLists:
-              - "https://tir-pdc.gaia-x.fiware.dev"
-            trustedIssuersLists:
-              - "http://pdc-til-trusted-issuers-list:8080"
-          - type: PacketDeliveryService
-            trustedParticipantsLists:
-              - "https://tir-pdc.gaia-x.fiware.dev"
-            trustedIssuersLists:
-              - "http://pdc-til-trusted-issuers-list:8080"
 
   - name: provider-til
     enabled: true
