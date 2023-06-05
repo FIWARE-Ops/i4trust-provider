@@ -24,6 +24,15 @@ data:
           "trustedIssuersLists": [
             {{ .Values.service.trustedIssuersLists | quote }}
           ]
+        },
+        {
+          "type": "ActivationService",
+          "trustedParticipantsLists": [
+            {{ .Values.service.trustedParticipantsLists | quote }}
+          ],
+          "trustedIssuersLists": [
+            {{ .Values.service.trustedIssuersLists | quote }}
+          ]
         }
       ]
     }
