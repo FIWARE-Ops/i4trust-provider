@@ -1,0 +1,18 @@
+trusted-issuers-list:
+  deployment:
+    image:
+      repository: quay.io/fiware/trusted-issuers-list
+      tag: 0.0.3
+
+  route:
+    til:
+      enabled: false
+      tls:
+        termination: edge
+        insecureEdgeTerminationPolicy: Redirect
+      
+  prometheus:
+    enabled: false
+
+  database:
+    persistence: false

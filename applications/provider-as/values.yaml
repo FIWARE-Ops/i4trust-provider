@@ -2,7 +2,7 @@ activation-service:
   deployment:
     image:
       repository: quay.io/i4trust/activation-service
-      tag: 2.0.0
+      tag: 2.1.0
       #pullPolicy: Always
       pullPolicy: IfNotPresent
 
@@ -203,3 +203,16 @@ activation-service:
       # EORI of AR
       id: "EU.EORI.DEPROVIDER"
 
+    issuer: # TODO client-id and TIL
+      clientId: "packet-delivery-service"
+      providerId: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
+      tilUri: "http://til.internal"
+      verifierUri: "https://provider-verifier-vcverifier-i4t-provider-main.apps.fiware.fiware.dev"
+      samedevicePath: "/api/v1/samedevice"
+      jwksPath: "/.well-known/jwks"
+      algorithms:
+        - "ES256"
+      roles:
+        createRole: "CREATE_ISSUER"
+        updateRole: "UPDATE_ISSUER"
+        deleteRole: "DELETE_ISSUER"
