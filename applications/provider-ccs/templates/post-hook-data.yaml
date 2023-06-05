@@ -20,7 +20,7 @@ spec:
             - -c
             - |
               curl -X POST ${CCS_HOST}/service --header "Content-Type: application/json" -d @/data/service_pds.json &&
-              curl -X POST ${CCS_HOST}/service --header "Content-Type: application/json" -d @/data/service_as.json &&
+              curl -X POST ${CCS_HOST}/service --header "Content-Type: application/json" -d @/data/service_as.json
           volumeMounts:
             - name: provider-ccs-init-data-volume
               mountPath: "/data"
