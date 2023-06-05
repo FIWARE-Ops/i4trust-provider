@@ -197,3 +197,9 @@ applications:
     purpose: *purpose
     helm_values:
     - values.yaml
+    values:
+      initData:
+        tilHost: "http://pdc-til-trusted-issuers-list:8080"
+        marketplaceCreateIssuer:
+          initEnabled: true
+          did: "did:key:z6MkvdQnXeKgRceAhNsZYjpQjSFcmTXshyGDvnNw7gziQhjG"
