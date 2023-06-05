@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: provider-ccs-data-cm
+data:
+  service.json: |
+    {
+      "id": {{ .Values.service.id | quote }},
+      "credentials": [
+        {{- range $ck, $c := .Values.service.credentials }}
+        {
+          "type": {{ $c.type | quote }},
+          "trustedParticipantsLists": [
+            {{- range $pk, $p := $c.trustedParticipantsLists }}
+            {{ $p | quote }},
+            {{- end }}
+          ],
+          "trustedIssuersLists": [
+            {{- range $ik, $i := $c.trustedIssuersLists }}
+            {{ $i | quote }},
+            {{- end }}
+          ]
+        },
+        {{- end }}
+      ]
+    }
