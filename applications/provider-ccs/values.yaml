@@ -18,5 +18,5 @@ service:
   ccsHost: "http://pdc-ccs-credentials-config-service:8080"
   idPDS: packet-delivery-service
   idAS: pdc-activation-service
-  trustedParticipantsLists: "https://tir-pdc.gaia-x.fiware.dev"
+  trustedParticipantsLists: "https://trusted-issuers-registry-tir-i4t-main.apps.fiware.fiware.dev"
   trustedIssuersLists: "http://pdc-til-trusted-issuers-list:8080"
