@@ -2,9 +2,10 @@ activation-service:
   deployment:
     image:
       repository: quay.io/i4trust/activation-service
-      tag: 2.1.0
-      #pullPolicy: Always
-      pullPolicy: IfNotPresent
+      #tag: 2.1.0
+      tag: 2.2.0-PRE-18
+      pullPolicy: Always
+      #pullPolicy: IfNotPresent
 
   route:
     enabled: true
@@ -193,6 +194,27 @@ activation-service:
       # -- Enable SQL logging to stderr
       echo: true
 
+    # Configuration for additional API keys to protect certain endpoints
+    apikeys:
+      # Config for iSHARE flow
+      ishare:
+        # Header name
+        headerName: "AS-API-KEY"
+        # API key (auto-generated if left empty)
+        apiKey: "eb4675ed-860e-4de1-a9a7-3e2e4356d08d"
+        # Enable for /token endpoint (API key will be required)
+        enabledToken: true
+        # Enable for /createpolicy endpoint (API key will be required)
+        enabledCreatePolicy: false
+      # Config for Trusted-Issuers-List flow
+      issuer:
+        # Header name
+        headerName: "AS-API-KEY"
+        # API key (auto-generated if left empty)
+        apiKey: "eb4675ed-860e-4de1-a9a7-3e2e4356d08d"
+        # Enable for /issuer endpoint (API key will be required)
+        enabledIssuer: true
+      
     ar:
       # Endpoint for token request
       token: "https://ar.isharetest.net/connect/token"
@@ -203,7 +225,7 @@ activation-service:
       # EORI of AR
       id: "EU.EORI.DEPROVIDER"
 
-    issuer: # TODO client-id and TIL
+    issuer:
       clientId: "packet-delivery-service"
       providerId: "did:key:z6MksU6tMfbaDzvaRe5oFE4eZTVTV4HJM4fmQWWGsDGQVsEr"
       tilUri: "http://pdc-til-trusted-issuers-list:8080"
