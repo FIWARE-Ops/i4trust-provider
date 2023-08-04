@@ -1,9 +1,9 @@
 kong:
   image:
     repository: quay.io/fiware/kong
-    tag: "0.5.4"
-    #pullPolicy: Always
-    pullPolicy: IfNotPresent
+    tag: "0.5.6-PRE-24"
+    pullPolicy: Always
+    #pullPolicy: IfNotPresent
 
   replicaCount: 1
 
